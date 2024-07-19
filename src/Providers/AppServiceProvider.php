@@ -2,9 +2,8 @@
 
 namespace Laravel\Spark\Providers;
 
-use Laravel\Spark\Spark;
-use Laravel\Cashier\Cashier;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Spark\Spark;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -94,15 +93,5 @@ class AppServiceProvider extends ServiceProvider
         Spark::tokensCan($this->tokensCan);
 
         Spark::byDefaultTokensCan($this->byDefaultTokensCan);
-    }
-
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        Cashier::ignoreMigrations();
     }
 }
