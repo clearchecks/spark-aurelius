@@ -1,5 +1,5 @@
 {
-    "name": "laravel/spark-aurelius",
+    "name": "clearchecks/spark-aurelius",
     "description": "Laravel Spark provides scaffolding for Laravel SaaS applications.",
     "keywords": ["laravel", "stripe", "billing", "scaffolding", "saas"],
     "license": "MIT",
