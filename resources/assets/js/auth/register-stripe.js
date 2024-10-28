@@ -1,13 +1,13 @@
-module.exports = {
+import register from './../mixins/register.js';
+import plans from './../mixins/plans.js';
+import vat from './../mixins/vat.js';
+import stripe from './../mixins/stripe.js';
+
+export default {
     /**
      * Load mixins for the component.
      */
-    mixins: [
-        require('./../mixins/register'),
-        require('./../mixins/plans'),
-        require('./../mixins/vat'),
-        require('./../mixins/stripe')
-    ],
+    mixins: [register, plans, vat, stripe],
 
 
     /**

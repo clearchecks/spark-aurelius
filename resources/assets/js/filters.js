@@ -1,3 +1,5 @@
+import Dinero from 'dinero.js';
+
 /**
  * Format the given date.
  */
@@ -41,8 +43,6 @@ Vue.filter('capitalize', value => {
  * Format the given money value.
  */
 Vue.filter('currency', value => {
-    const Dinero = require('dinero.js').default
-
     return Dinero({
         amount: Math.round(value * 100),
         currency: window.Spark.currency

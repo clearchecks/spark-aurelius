@@ -1,3 +1,5 @@
+import http from './http.js';
+
 /**
  * Initialize the Spark form extension points.
  */
@@ -7,17 +9,18 @@ Spark.forms = {
     updateTeamMember: {}
 };
 
+
 /**
  * Load the SparkForm helper class.
  */
-require('./form');
+import('./form.js');
 
 /**
  * Define the SparkFormError collection class.
  */
-require('./errors');
+import('./errors.js');
 
 /**
  * Add additional HTTP / form helpers to the Spark object.
  */
-$.extend(Spark, require('./http'));
+$.extend(Spark, http);

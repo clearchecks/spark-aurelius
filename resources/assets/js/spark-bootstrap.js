@@ -1,12 +1,22 @@
+import Vue from 'vue';
+import urijs from 'urijs';
+import axios from 'axios';
+import lodash from 'lodash';
+import moment from 'moment';
+import Promise from 'promise';
+import Popper from 'popper.js';
+import jQuery from 'jquery';
+import mixin from './mixin.js';
+
 /*
  * Load various JavaScript modules that assist Spark.
  */
-window.URI = require('urijs');
-window.axios = require('axios');
-window._ = require('lodash');
-window.moment = require('moment');
-window.Promise = require('promise');
-window.Popper = require('popper.js').default;
+window.URI = urijs;
+window.axios = axios;
+window._ = lodash;
+window.moment = moment;
+window.Promise = Promise;
+window.Popper = Popper;
 window.__ = (key, replace) => {
     var translation = Spark.translations[key] ? Spark.translations[key] : key;
 
@@ -44,16 +54,38 @@ window.moment.locale('en');
  * Load jQuery and Bootstrap jQuery, used for front-end interaction.
  */
 if (window.$ === undefined || window.jQuery === undefined) {
-    window.$ = window.jQuery = require('jquery');
+    window.$ = window.jQuery = jQuery;
 }
 
-require('bootstrap');
+import 'bootstrap';
 
 /**
  * Load Vue if this application is using Vue as its framework.
  */
 if ($('#spark-app').length > 0) {
-    require('vue-bootstrap');
+    /*
+    * Load Vue, the JavaScript framework used by Spark.
+    */
+    if (window.Vue === undefined) {
+        window.Vue = Vue;
+
+        window.Bus = new Vue();
+    }
+
+    /**
+     * Load Vue Global Mixin.
+     */
+    Vue.mixin(mixin);
+
+    /**
+     * Define the Vue filters.
+     */
+    import('./filters.js');
+
+    /**
+     * Load the Spark form utilities.
+     */
+    import('./forms/bootstrap.js');
 }
 
 /**

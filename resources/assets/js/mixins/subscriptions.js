@@ -3,7 +3,7 @@
  * and send subscription plan changes to the server. This contains helpers for
  * the active subscription, trial information and other convenience helpers.
  */
-module.exports = {
+export default {
     /**
      * The mixin's data.
      */

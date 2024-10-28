@@ -3,7 +3,7 @@
  * on the registration and subscription screens, which is used to show
  * all of the various subscription plans offered by the application.
  */
-module.exports = {
+export default {
     data() {
         return {
             selectedPlan: null,
