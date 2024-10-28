@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     methods: {
         /**
          * Get the current discount for the given billable entity.

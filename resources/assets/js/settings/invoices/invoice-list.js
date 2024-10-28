@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     props: ['user', 'team', 'invoices', 'billableType'],
 
 

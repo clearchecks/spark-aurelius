@@ -35,7 +35,7 @@ window.SparkForm = function (data) {
     /**
      * Reset the form to its original state.
      */
-    this.reset = function() {
+    this.reset = function () {
         $.extend(form, initialData);
         form.resetStatus();
     };

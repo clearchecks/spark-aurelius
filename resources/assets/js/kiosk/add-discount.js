@@ -7,7 +7,7 @@ function kioskAddDiscountForm () {
     };
 }
 
-module.exports = {
+export default {
     mixins: [require('./../mixins/discounts')],
 
 

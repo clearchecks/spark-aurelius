@@ -1,7 +1,7 @@
 /**
  * Export the root Spark application.
  */
-module.exports = {
+export default {
     el: '#spark-app',
 
 

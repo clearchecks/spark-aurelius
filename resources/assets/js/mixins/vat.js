@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     methods: {
         /**
          * Determine if the given country collects European VAT.

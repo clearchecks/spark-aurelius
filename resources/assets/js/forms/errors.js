@@ -8,7 +8,7 @@ window.SparkFormErrors = function () {
      * Determine if the collection has any errors.
      */
     this.hasErrors = function () {
-        return ! _.isEmpty(this.errors);
+        return !_.isEmpty(this.errors);
     };
 
 
@@ -53,7 +53,7 @@ window.SparkFormErrors = function () {
         if (typeof errors === 'object') {
             this.errors = errors;
         } else {
-            this.errors = {'form': [__('Something went wrong. Please try again or contact customer support.')]};
+            this.errors = { 'form': [__('Something went wrong. Please try again or contact customer support.')] };
         }
     };
 
