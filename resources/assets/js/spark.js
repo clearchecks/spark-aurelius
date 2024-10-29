@@ -1,3 +1,5 @@
+import SparkForm from './forms/form.js';
+
 /**
  * Export the root Spark application.
  */

@@ -2,6 +2,7 @@ import register from './../mixins/register.js';
 import plans from './../mixins/plans.js';
 import vat from './../mixins/vat.js';
 import stripe from './../mixins/stripe.js';
+import SparkForm from '../forms/form.js';
 
 export default {
     /**

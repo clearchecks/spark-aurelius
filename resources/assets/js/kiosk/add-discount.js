@@ -1,3 +1,5 @@
+import SparkForm from '../forms/form.js';
+
 function kioskAddDiscountForm () {
     return {
         type: 'amount',
