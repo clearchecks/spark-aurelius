@@ -80,8 +80,8 @@ if ($('#spark-app').length > 0) {
     Vue.mixin(mixin);
     
     /**
- * Format the given date.
- */
+     * Format the given date.
+     */
     Vue.filter('date', value => {
         return moment.utc(value).local().format('MMMM Do, YYYY')
     });

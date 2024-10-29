@@ -1,3 +1,5 @@
+import SparkForm from '../forms/form.js';
+
 /*
  * This mixin is used by most of the subscription related screens to select plans
  * and send subscription plan changes to the server. This contains helpers for

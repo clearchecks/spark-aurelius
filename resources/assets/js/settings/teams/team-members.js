@@ -1,3 +1,5 @@
+import SparkForm from '../../forms/form.js';
+
 export default {
     props: ['user', 'team'],
 

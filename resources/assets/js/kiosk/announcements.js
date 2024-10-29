@@ -1,3 +1,5 @@
+import SparkForm from '../forms/form.js';
+
 var announcementsCreateForm = function () {
     return {
         body: '',
