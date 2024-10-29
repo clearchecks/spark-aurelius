@@ -11,12 +11,6 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Spark\Validation\StateValidator;
 use Laravel\Spark\Validation\VatIdValidator;
-use Laravel\Spark\Validation\CountryValidator;
-use Laravel\Spark\Console\Commands\InstallCommand;
-use Laravel\Spark\Console\Commands\UpdateCommand;
-use Laravel\Spark\Console\Commands\VersionCommand;
-use Laravel\Spark\Console\Commands\UpdateViewsCommand;
-use Laravel\Spark\Console\Commands\StorePerformanceIndicatorsCommand;
 
 class SparkServiceProvider extends ServiceProvider
 {
@@ -125,18 +119,6 @@ class SparkServiceProvider extends ServiceProvider
     }
 
     /**
-     * Define the language publishing configuration.
-     *
-     * @return void
-     */
-    public function defineLanguagePublishing()
-    {
-        $this->publishes([
-            SPARK_PATH.'/install-stubs/resources/lang' => resource_path('lang'),
-        ], 'spark-lang');
-    }
-
-    /**
      * Define the "full" publishing configuration.
      *
      * @return void
@@ -144,10 +126,9 @@ class SparkServiceProvider extends ServiceProvider
     public function defineFullPublishing()
     {
         $this->publishes([
-            SPARK_PATH.'/resources/views' => resource_path('views/vendor/spark'),
-            SPARK_PATH.'/resources/assets/js' => resource_path('assets/js/spark'),
-            SPARK_PATH.'/resources/assets/sass' => resource_path('assets/sass/spark'),
-            SPARK_PATH.'/install-stubs/resources/lang' => resource_path('lang'),
+            SPARK_PATH . '/resources/views' => resource_path('views/vendor/spark'),
+            SPARK_PATH . '/resources/assets/js' => resource_path('assets/js/spark'),
+            SPARK_PATH . '/resources/assets/sass' => resource_path('assets/sass/spark'),
         ], 'spark-full');
     }
 
@@ -164,16 +145,6 @@ class SparkServiceProvider extends ServiceProvider
 
         if (! class_exists('Spark')) {
             class_alias('Laravel\Spark\Spark', 'Spark');
-        }
-
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                InstallCommand::class,
-                UpdateCommand::class,
-                UpdateViewsCommand::class,
-                StorePerformanceIndicatorsCommand::class,
-                VersionCommand::class,
-            ]);
         }
 
         $this->registerServices();
