@@ -1,7 +1,9 @@
+import SparkFormErrors from './errors.js';
+
 /**
  * SparkForm helper class. Used to set common properties on all forms.
  */
-window.SparkForm = function (data) {
+export default function (data) {
     var form = this;
     const initialData = data;
 

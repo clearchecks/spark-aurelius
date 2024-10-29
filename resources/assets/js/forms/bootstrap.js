@@ -9,17 +9,6 @@ Spark.forms = {
     updateTeamMember: {}
 };
 
-
-/**
- * Load the SparkForm helper class.
- */
-import('./form.js');
-
-/**
- * Define the SparkFormError collection class.
- */
-import('./errors.js');
-
 /**
  * Add additional HTTP / form helpers to the Spark object.
  */

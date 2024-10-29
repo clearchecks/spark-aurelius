@@ -7,6 +7,8 @@ import Promise from 'promise';
 import Popper from 'popper.js';
 import jQuery from 'jquery';
 import mixin from './mixin.js';
+import Dinero from 'dinero.js';
+import SparkForm from './forms/form.js';
 
 /*
  * Load various JavaScript modules that assist Spark.
@@ -76,11 +78,53 @@ if ($('#spark-app').length > 0) {
      * Load Vue Global Mixin.
      */
     Vue.mixin(mixin);
+    
+    /**
+ * Format the given date.
+ */
+    Vue.filter('date', value => {
+        return moment.utc(value).local().format('MMMM Do, YYYY')
+    });
 
     /**
-     * Define the Vue filters.
+     * Format the given date as a timestamp.
      */
-    import('./filters.js');
+    Vue.filter('datetime', value => {
+        return moment.utc(value).local().format('MMMM Do, YYYY h:mm A');
+    });
+
+    /**
+     * Format the given date into a relative time.
+     */
+    Vue.filter('relative', value => {
+        return moment.utc(value).local().locale('en-short').fromNow();
+    });
+
+    /**
+     * Convert the first character to upper case.
+     *
+     * Source: https://github.com/vuejs/vue/blob/1.0/src/filters/index.js#L37
+     */
+    Vue.filter('capitalize', value => {
+        if (!value && value !== 0) {
+            return '';
+        }
+
+        return value.toString().charAt(0).toUpperCase()
+            + value.slice(1);
+    });
+
+    /**
+     * Format the given money value.
+     */
+    Vue.filter('currency', value => {
+        return Dinero({
+            amount: Math.round(value * 100),
+            currency: window.Spark.currency
+        }).setLocale(window.Spark.currencyLocale).toFormat('$0,0.00');
+    });
+
+    window.SparkForm = SparkForm;
 
     /**
      * Load the Spark form utilities.
