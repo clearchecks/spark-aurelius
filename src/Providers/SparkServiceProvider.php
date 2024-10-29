@@ -84,8 +84,6 @@ class SparkServiceProvider extends ServiceProvider
 
             $this->defineAssetPublishing();
 
-            $this->defineLanguagePublishing();
-
             $this->defineFullPublishing();
         }
     }
