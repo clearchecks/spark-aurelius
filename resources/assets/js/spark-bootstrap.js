@@ -9,6 +9,7 @@ import jQuery from 'jquery';
 import mixin from './mixin.js';
 import Dinero from 'dinero.js';
 import SparkForm from './forms/form.js';
+import http from './forms/http.js';
 
 /*
  * Load various JavaScript modules that assist Spark.
@@ -127,9 +128,18 @@ if ($('#spark-app').length > 0) {
     window.SparkForm = SparkForm;
 
     /**
-     * Load the Spark form utilities.
+     * Initialize the Spark form extension points.
      */
-    import('./forms/bootstrap.js');
+    Spark.forms = {
+        register: {},
+        updateContactInformation: {},
+        updateTeamMember: {}
+    };
+
+    /**
+     * Add additional HTTP / form helpers to the Spark object.
+     */
+    $.extend(Spark, http);
 }
 
 /**
