@@ -2,10 +2,10 @@
 
 namespace Laravel\Spark\Configuration;
 
-use Laravel\Spark\Spark;
-use Laravel\Cashier\Cashier;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Cashier\Cashier;
 use Laravel\Spark\Contracts\InitialFrontendState;
+use Laravel\Spark\Spark;
 
 trait ProvidesScriptVariables
 {
@@ -17,7 +17,6 @@ trait ProvidesScriptVariables
     public static function scriptVariables()
     {
         return [
-            'translations' => static::getTranslations() + ['teams.team' => trans('teams.team'), 'teams.member' => trans('teams.member')],
             'cardUpFront' => Spark::needsCardUpFront(),
             'collectsBillingAddress' => Spark::collectsBillingAddress(),
             'collectsEuropeanVat' => Spark::collectsEuropeanVat(),
@@ -44,21 +43,5 @@ trait ProvidesScriptVariables
             'chargesUsersPerTeam' => Spark::chargesUsersPerTeam(),
             'chargesTeamsPerMember' => Spark::chargesTeamsPerMember(),
         ];
-    }
-
-    /**
-     * Get the translation keys from file.
-     *
-     * @return array
-     */
-    private static function getTranslations()
-    {
-        $translationFile = resource_path('lang/'.app()->getLocale().'.json');
-
-        if (! is_readable($translationFile)) {
-            $translationFile = resource_path('lang/'.app('translator')->getFallback().'.json');
-        }
-
-        return json_decode(file_get_contents($translationFile), true);
     }
 }
