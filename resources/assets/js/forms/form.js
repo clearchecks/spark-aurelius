@@ -1,4 +1,5 @@
 import SparkFormErrors from './errors.js';
+import $ from 'jquery';
 
 /**
  * SparkForm helper class. Used to set common properties on all forms.
