@@ -26,7 +26,7 @@ window.__ = (key, replace) => {
     _.forEach(replace, (value, key) => {
         translation = translation.replace(':'+key, value);
     });
-    
+
     return translation;
 };
 
@@ -60,8 +60,6 @@ if (window.$ === undefined || window.jQuery === undefined) {
     window.$ = window.jQuery = jQuery;
 }
 
-import 'bootstrap';
-
 /**
  * Load Vue if this application is using Vue as its framework.
  */
@@ -79,7 +77,7 @@ if ($('#spark-app').length > 0) {
      * Load Vue Global Mixin.
      */
     Vue.mixin(mixin);
-    
+
     /**
      * Format the given date.
      */
