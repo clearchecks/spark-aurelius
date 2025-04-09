@@ -109,15 +109,11 @@ export default {
         refreshApiTokenEveryFewMinutes() {
             this.lastRefreshedApiTokenAt = moment();
 
-            setInterval(() => {
-                this.refreshApiToken();
-            }, 240000);
-
-            setInterval(() => {
-                if (moment().diff(this.lastRefreshedApiTokenAt, 'minutes') >= 5) {
+            window.sparkTokenRefreshInterval = setInterval(() => {
+                if (moment().diff(this.lastRefreshedApiTokenAt, 'minutes') >= 4) {
                     this.refreshApiToken();
                 }
-            }, 5000);
+            }, 15000);
         },
 
 
