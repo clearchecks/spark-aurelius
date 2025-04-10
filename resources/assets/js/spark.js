@@ -42,10 +42,6 @@ export default {
             this.loadDataForAuthenticatedUser();
         }
 
-        if (Spark.userId && Spark.usesApi) {
-            this.refreshApiTokenEveryFewMinutes();
-        }
-
         Bus.$on('updateUser', function () {
             self.getUser();
         });
@@ -101,31 +97,6 @@ export default {
         loadDataForAuthenticatedUser() {
             this.getNotifications();
         },
-
-
-        /**
-         * Refresh the current API token every few minutes.
-         */
-        refreshApiTokenEveryFewMinutes() {
-            this.lastRefreshedApiTokenAt = moment();
-
-            window.sparkTokenRefreshInterval = setInterval(() => {
-                if (moment().diff(this.lastRefreshedApiTokenAt, 'minutes') >= 4) {
-                    this.refreshApiToken();
-                }
-            }, 15000);
-        },
-
-
-        /**
-         * Refresh the current API token.
-         */
-        refreshApiToken() {
-            this.lastRefreshedApiTokenAt = moment();
-
-            axios.put('/spark/token');
-        },
-
 
         /*
          * Get the current user of the application.
