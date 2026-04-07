@@ -2,6 +2,8 @@
 
 namespace Laravel\Spark;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Cashier\Subscription as CashierSubscription;
 
 class TeamSubscription extends CashierSubscription
@@ -33,7 +35,7 @@ class TeamSubscription extends CashierSubscription
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function owner()
+    public function owner(): BelongsTo
     {
         return $this->belongsTo(Spark::teamModel(), 'team_id');
     }
@@ -43,7 +45,7 @@ class TeamSubscription extends CashierSubscription
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function items()
+    public function items(): HasMany
     {
         return $this->hasMany(TeamSubscriptionItem::class, 'subscription_id');
     }
