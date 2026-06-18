@@ -16,9 +16,7 @@ trait CanJoinTeams
         return count($this->teams) > 0;
     }
 
-    /**
-     * Get all of the teams that the user belongs to.
-     */
+    /** Get all of the teams that the user belongs to. */
     public function teams()
     {
         return $this->belongsToMany(
@@ -26,9 +24,7 @@ trait CanJoinTeams
         )->withPivot(['role'])->orderBy('name', 'asc');
     }
 
-    /**
-     * Get all of the pending invitations for the user.
-     */
+    /** Get all of the pending invitations for the user. */
     public function invitations()
     {
         return $this->hasMany(Invitation::class);
@@ -38,6 +34,7 @@ trait CanJoinTeams
      * Determine if the user is on the given team.
      *
      * @param  \Laravel\Spark\Team  $team
+     *
      * @return bool
      */
     public function onTeam($team)
@@ -49,6 +46,7 @@ trait CanJoinTeams
      * Determine if the given team is owned by the user.
      *
      * @param  \Laravel\Spark\Team  $team
+     *
      * @return bool
      */
     public function ownsTeam($team)
@@ -56,9 +54,7 @@ trait CanJoinTeams
         return $this->id && $team->owner_id && $this->id === $team->owner_id;
     }
 
-    /**
-     * Get all of the teams that the user owns.
-     */
+    /** Get all of the teams that the user owns. */
     public function ownedTeams()
     {
         return $this->hasMany(Spark::teamModel(), 'owner_id');
@@ -68,6 +64,7 @@ trait CanJoinTeams
      * Get the user's role on a given team.
      *
      * @param  \Laravel\Spark\Team  $team
+     *
      * @return string
      */
     public function roleOn($team)
@@ -88,31 +85,13 @@ trait CanJoinTeams
     }
 
     /**
-     * Accessor for the currentTeam method.
+     * Accessor for the currentTeam relationship.
      *
      * @return \Illuminate\Database\Eloquent\Model|null
      */
     public function getCurrentTeamAttribute()
     {
-        return $this->currentTeam();
-    }
-
-    /**
-     * Get the team that user is currently viewing.
-     *
-     * @return \Illuminate\Database\Eloquent\Model|null
-     */
-    public function currentTeam()
-    {
-        if (is_null($this->current_team_id) && $this->hasTeams()) {
-            $this->switchToTeam($this->teams->first());
-
-            return $this->currentTeam();
-        } elseif (! is_null($this->current_team_id)) {
-            $currentTeam = $this->teams->find($this->current_team_id);
-
-            return $currentTeam ?: $this->refreshCurrentTeam();
-        }
+        return $this->getRelationValue('currentTeam');
     }
 
     /**
@@ -122,7 +101,7 @@ trait CanJoinTeams
      */
     public function currentTeamOnTrial()
     {
-        return $this->currentTeam() && $this->currentTeam()->onTrial();
+        return $this->currentTeam && $this->currentTeam->onTrial();
     }
 
     /**
@@ -132,19 +111,18 @@ trait CanJoinTeams
      */
     public function ownsCurrentTeam()
     {
-        return $this->currentTeam() && $this->currentTeam()->owner_id === $this->id;
+        return $this->currentTeam && $this->currentTeam->owner_id === $this->id;
     }
 
     /**
      * Switch the current team for the user.
      *
      * @param  \Laravel\Spark\Team  $team
-     * @return void
      */
     public function switchToTeam($team)
     {
         if (! $this->onTeam($team)) {
-            throw new InvalidArgumentException(__("teams.user_doesnt_belong_to_team"));
+            throw new InvalidArgumentException(__('teams.user_doesnt_belong_to_team'));
         }
 
         $this->current_team_id = $team->id;
@@ -163,7 +141,9 @@ trait CanJoinTeams
 
         $this->save();
 
-        return $this->currentTeam();
+        $this->unsetRelation('currentTeam');
+
+        return $this->currentTeam;
     }
 
     /**
